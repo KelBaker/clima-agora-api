@@ -1,8 +1,8 @@
-# 🌦️ DncWeather — Consulta de CEP e Previsão do Tempo
+# 🌦️ Clima Agora — CEP, Clima e Alertas Oficiais
 
-Aplicação web front-end que consome duas APIs públicas para buscar o endereço a partir de um CEP e exibir a previsão de temperatura da região, sem necessidade de backend.
+Aplicação web front-end que, a partir de um único CEP, encadeia quatro APIs públicas para entregar endereço, temperatura em tempo real, previsão dos próximos 7 dias e alertas meteorológicos oficiais do INMET — tudo sem backend e sem cadastro.
 
-`html` `css` `javascript` `fetch-api` `viacep` `open-meteo` `web-scraping-free` `weather-app`
+`html` `css` `javascript` `fetch-api` `viacep` `nominatim` `open-meteo` `inmet` `geocoding` `weather-app`
 
 ## 🔗 Demo
 
@@ -10,17 +10,28 @@ https://previsaotempo-consumoapi.netlify.app/
 
 ## ✨ Funcionalidades
 
-- Busca de endereço (logradouro, bairro, cidade/UF) a partir do CEP, via [API ViaCEP](https://viacep.com.br/)
-- Consulta da temperatura atual por latitude/longitude, via [API Open-Meteo](https://open-meteo.com/)
-- Validação de CEP, latitude e longitude no front-end antes da requisição
+- Busca de endereço e código IBGE do município a partir do CEP, via [API ViaCEP](https://viacep.com.br/)
+- Geocodificação automática (cidade/UF → latitude/longitude) via [API Nominatim](https://nominatim.org/) (OpenStreetMap) — o usuário não precisa saber nem digitar coordenadas
+- Temperatura atual em tempo real e previsão dos próximos 7 dias (máxima, mínima e chance de chuva), via [API Open-Meteo](https://open-meteo.com/)
+- Alertas meteorológicos oficiais do INMET para o município consultado, via a API pública [radarmeteorologico.com.br](https://radarmeteorologico.com.br/api-publica)
+- Validação de CEP no front-end antes da requisição
 - Tratamento de erro de rede/API com feedback visual para o usuário
-- Interface responsiva com tipografia do Google Fonts (Inter Tight)
+- Interface responsiva, tipografia DM Sans / Space Grotesk
 
 ## 🛠️ Tecnologias
 
 - HTML5
 - CSS3
-- JavaScript (Fetch API, `async/await`)
+- JavaScript (Fetch API, `async/await`) — sem frameworks
+
+## 🔌 APIs consumidas
+
+| API | Uso |
+|---|---|
+| [ViaCEP](https://viacep.com.br/) | Endereço e código IBGE a partir do CEP |
+| [Nominatim](https://nominatim.org/) (OpenStreetMap) | Geocodificação (cidade/UF → latitude/longitude) |
+| [Open-Meteo](https://open-meteo.com/) | Temperatura atual e previsão dos próximos 7 dias |
+| [radarmeteorologico.com.br](https://radarmeteorologico.com.br/api-publica) | Alertas oficiais do INMET por município |
 
 ## 🚀 Como rodar localmente
 
@@ -33,8 +44,9 @@ Depois é só abrir o `index.html` no navegador (ou usar a extensão **Live Serv
 
 ## 🔭 Possíveis melhorias
 
-- Obter latitude/longitude automaticamente a partir do CEP (hoje são digitadas manualmente)
-- Exibir previsão para os próximos dias, não só a temperatura atual
+- Corrigir a exibição das colunas de endereço em telas pequenas (hoje só o logradouro aparece no mobile)
+- Estado de carregamento no botão enquanto as buscas estão em andamento
+- Suportar múltiplos alertas simultâneos por região (hoje exibe apenas o primeiro encontrado)
 - Cache local das últimas buscas
 
 ## 📄 Licença
