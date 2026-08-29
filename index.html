@@ -1,78 +1,147 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>DncWeather</title>
-</head>
-<body>
-    <div class="cabecalho">
-        <h1>DncWeather</h1>
-        <nav>
-            <ul>
-                <li>Endereços</li>
-                <li>Previsão do tempo</li>
-            </ul>
-        </nav>
-    </div>
-    <div class="parte-informativa">
-        <p>Descubra mais com precisão <br> previsões do tempo e endereços <br>em tempo real.</p>
-        <img src="./imagens/nuvem.svg" width="140" alt="">
-    </div>
-    <div class="formulario">
-        <form id="form">
-            <p class="digite">Primeiro nome:</p>
-            <label for="nome"></label>
-            <input type="text" id="nome" placeholder="Insira seu primeiro nome" required>
-            <p class="digite">E-mail:</p>
-            <label for="email"></label>
-            <input type="email" id="email" placeholder="Insira seu email" required>
-            <p class="digite">Digite o CEP:</p>
-            <label for="cep"></label>
-            <input type="text" id="cep" placeholder="Insira o CEP" required>
-            <p class="digite">Digite a latitude e longitude pra saber a previsão</p>
-            <label for="latitude"></label>
-            <div class="coordenadas">
-                <input id="latitude" class="coordenadas" type="text" placeholder="Latitude" required>
-                <input id="longitude" class="coordenadas" type="text" placeholder="Longitude" required>
-            </div>
-            <button type="submit">Acessar</button>
-        </form>
-    </div>
-    <div class="CEP">
-        <h1>Resultado da busca por CEP:</h1>
-        <img id="cep-image" src="./imagens/cep.svg" width="95" alt="">
-    </div>
-    <div class="cep-informativo">
-        <p>Logradouro / Nome</p>
-        <p>Bairro/Distrito</p>
-        <p>Localidade/UF</p>
-    </div>
-    <div class="cep-resultado">
-        <p>Logradouro / Nome</p>
-        <p>Bairro/Distrito</p>
-        <p>Localidade/UF</p>
-    </div>
-    <div class="tempo">
-        <h1>Previsão do tempo na região:</h1>
-        <img id="tempo-image" src="./imagens/tempo.svg" width="95" alt="">
-    </div>
-    <div class="tempo-resultado">
-        <p>Previsão de tempo de acordo com a região:</p>
-    </div>
-    <footer class="rodape">
-        <nav>
-            <ul>
-                <li>Termos de Uso |</li>
-                <li>Politicas de Privacidade</li>
-            </ul>
-        </nav>
-    </footer>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="script.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+  <title>Clima Agora | Previsão do tempo</title>
+</head>
+
+<body>
+  <header class="cabecalho">
+    <a class="marca" href="#">
+      <span class="marca-icone">◒</span>
+      <span>Clima Agora</span>
+    </a>
+
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="#consulta">Consultar endereço</a></li>
+        <li><a href="#previsao">Previsão do tempo</a></li>
+        <li><a href="#alerta">Alertas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+        <div class="hero-conteudo">
+            <h1>Descubra o clima da sua região pelo CEP.</h1>
+            <p>
+            Digite o CEP e veja o endereço, a temperatura atual, a previsão
+            dos próximos dias e alertas oficiais do INMET pra sua região —
+            sem cadastro e sem precisar saber sua localização de cor.
+            </p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+            <div class="visual-card">
+            <span class="visual-label">Agora</span>
+            <strong id="temperatura-atual">--°</strong>
+            <span>Condições atuais</span>
+            </div>
+
+            <img src="./imagens/nuvem.svg" width="130" alt="" />
+        </div>
+    </section>
+
+    <section class="consulta-layout" id="consulta">
+        <div class="formulario">
+            <h2>Consulte sua região</h2>
+            <p class="form-description">
+            Preencha o CEP para localizar o endereço e a previsão do tempo.
+            </p>
+
+            <form id="form">
+            <div class="campo">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" placeholder="00000-000" inputmode="numeric" autocomplete="postal-code" required />
+            </div>
+
+            <button type="submit">
+                <span id="botao-texto">Consultar informações</span>
+                <span aria-hidden="true">→</span>
+            </button>
+            </form>
+        </div>
+
+        <aside class="projeto-info">
+            <h2>Como funciona por dentro</h2>
+            <p>
+            JavaScript puro, sem frameworks. O CEP é resolvido em endereço e código
+            IBGE pela API ViaCEP, o endereço vira coordenadas pela API Nominatim
+            (OpenStreetMap), a Open-Meteo devolve a temperatura atual e a previsão
+            dos próximos dias, e o INMET informa se há algum alerta oficial pra
+            região — tudo em cadeia, automático.
+            </p>
+        </aside>
+    </section>
+
+    <section class="resultado-section" id="resultado">
+        <div class="section-heading">
+            <h2>Endereço encontrado</h2>
+            <img id="cep-image" src="./imagens/cep.svg" width="70" alt="" />
+        </div>
+
+      <div class="resultado-tabela">
+        <div class="cep-informativo">
+          <p>Logradouro / Nome</p>
+          <p>Bairro / Distrito</p>
+          <p>Localidade / UF</p>
+        </div>
+
+        <div class="cep-resultado">
+          <p>—</p>
+          <p>—</p>
+          <p>—</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="previsao-section" id="previsao">
+        <div class="section-heading">
+            <h2>Previsão do tempo</h2>
+            <img id="tempo-image" src="./imagens/tempo.svg" width="75" alt="" />
+        </div>
+
+        <div class="tempo-resultado">
+            <p>Previsão do tempo de acordo com a região consultada.</p>
+        </div>
+
+        <p class="previsao-semanal-titulo">Próximos dias</p>
+        <div id="previsao-semanal" class="previsao-semanal"></div>
+    </section>
+
+    <section class="previsao-section" id="alerta">
+        <div class="section-heading">
+            <h2>Alerta oficial (INMET)</h2>
+        </div>
+
+        <div id="alerta-inmet" class="tempo-resultado">
+            <p>Consulte um CEP para ver se há alertas meteorológicos oficiais na sua região.</p>
+        </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>© 2026 Kelvin Henrique</p>
+
+    <nav aria-label="Redes sociais">
+      <ul>
+        <li><a href="https://github.com/KelBaker" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/kelvin-h-507bb9228/" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
