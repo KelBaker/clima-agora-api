@@ -36,16 +36,14 @@ https://previsaotempo-consumoapi.netlify.app/
 ## 🚀 Como rodar localmente
 
 ```bash
-git clone https://github.com/KelBaker/Consumo-API---Previsao-tempo.git
-cd Consumo-API---Previsao-tempo
+git clone https://github.com/KelBaker/clima-agora-api.git
+cd clima-agora-api
 ```
 
 Depois é só abrir o `index.html` no navegador (ou usar a extensão **Live Server** do VSCode para hot-reload).
 
 ## 🔭 Possíveis melhorias
 
-- Corrigir a exibição das colunas de endereço em telas pequenas (hoje só o logradouro aparece no mobile)
-- Estado de carregamento no botão enquanto as buscas estão em andamento
 - Suportar múltiplos alertas simultâneos por região (hoje exibe apenas o primeiro encontrado)
 - Cache local das últimas buscas
 
